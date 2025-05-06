@@ -63,7 +63,7 @@ class App extends Component{
   
     const colorScale = d3.scaleSequential()
       .domain([0, d3.max(data, d => +d["AI-Generated Content Volume (TBs per year)"])])
-      .interpolator(d3.interpolateBlues);
+      .interpolator(d3.interpolateOranges);
   
     // De-duplicate cells by [Tool, Industry]
     const cellMap = new Map();
