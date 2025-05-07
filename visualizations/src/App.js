@@ -22,11 +22,116 @@ class App extends Component{
   }
   componentDidUpdate(prevProps,prevState){
     if (prevState.data !== this.state.data && this.state.data.length > 0) {
-      this.drawChart();
-      console.log("Type of data:", typeof this.props.data);
+      this.drawHeatMap();
+      this.drawLineChart();
+      console.log("Type of data:", typeof this.state.data);
     }
   }
-  drawChart() {
+  
+  
+  drawLineChart() {
+    const country = "UK"; // 🔁 change this to whatever country you want
+    const filtered = this.state.data.filter(d => d.Country === country);
+
+    // Group and aggregate data by year
+    const grouped = d3.groups(filtered, d => +d.Year);
+
+    const data = grouped.map(([year, entries]) => ({
+      Year: new Date(+year, 0, 1),
+      trust: d3.mean(entries, d => +d["Consumer Trust in AI (%)"]),
+      collab : d3.mean(entries, d=> +d["Human-AI Collaboration Rate (%)"])
+    })).sort((a, b) => a.Year - b.Year);
+
+    // Set dimensions
+    const margin = { top: 140, right: 20, bottom: 50, left: 200 },
+          width = 1000,
+          height = 600,
+          innerWidth = width - margin.left - margin.right-50,
+          innerHeight = height - margin.top - margin.bottom;
+
+    // Clear and create SVG
+    d3.select("#linechart").selectAll("*").remove();
+    const svg = d3.select("#linechart")
+      .append("svg")
+      .attr("width", width)
+      .attr("height", height)
+      .append("g")
+      .attr("transform", `translate(${margin.left},${margin.top})`);
+
+    // Scales
+    const xScale = d3.scaleTime()
+      .domain(d3.extent(data, d => d.Year))
+      .range([0, innerWidth]);
+
+    const yScale = d3.scaleLinear()
+      .domain([0, d3.max(data, d => d.trust)])
+      .range([innerHeight, 0])
+      .nice();
+      const yScale2 = d3.scaleLinear()
+      .domain([0, d3.max(data, d => d.collab)])
+      .range([innerHeight, 0])
+      .nice();
+    // Line generator
+    const line = d3.line()
+      .x(d => xScale(d.Year))
+      .y(d => yScale(d.trust));
+    
+    const line2 = d3.line()
+      .x(d=> xScale(d.Year))
+      .y(d=>yScale2(d.collab));
+
+    svg.selectAll(".line-trust")
+      .data([null])
+      .join("path")
+      .attr("class", "line-trust")
+      .attr("fill", "none")
+      .attr("stroke", "steelblue")
+      .attr("stroke-width", 2)
+      .attr("d", () => line(data));
+    
+    svg.selectAll(".line-collab")
+      .data([null])
+      .join("path")
+      .attr("class", "line-collab")
+      .attr("fill", "none")
+      .attr("stroke", "red")
+      .attr("stroke-width", 2)
+      .attr("d", () => line2(data));
+  
+    // Axes
+    svg.append("g")
+      .attr("transform", `translate(0,${innerHeight})`)
+      .call(d3.axisBottom(xScale).ticks(data.length).tickFormat(d3.timeFormat('%Y')));
+  
+    svg.append("g")
+      .call(d3.axisLeft(yScale));
+  
+    // Axis labels
+    svg.append("text")
+      .attr("x", innerWidth / 2)
+      .attr("y", innerHeight + 40)
+      .attr("text-anchor", "middle")
+      .style("font-weight", "bold")
+      .text("Year");
+  
+    svg.append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("x", -innerHeight / 2)
+      .attr("y", -40)
+      .attr("text-anchor", "middle")
+      .style("font-weight", "bold")
+      .text("Consumer Trust in AI (%)");
+
+    svg.append("text")
+      .attr("transform", "rotate(90)")
+      .attr("x", innerHeight / 2)
+      .attr("y", -innerWidth-40)
+      .attr("text-anchor", "middle")
+      .style("font-weight", "bold")
+      .text("Human-AI Collaboration Rate (%)");
+  }
+
+  drawHeatMap() {
     const data = this.state.data;
   
     const margin = { top: 140, right: 20, bottom: 50, left: 200 },
@@ -193,6 +298,7 @@ class App extends Component{
     return (
       <div className="App">
         <div id="heatmap" style={{ backgroundColor: "#f5f5f5" , fontFamily: 'Arial, sans-serif' }}></div>
+        <div id="linechart" style={{ backgroundColor: "#f5f5f5" , fontFamily: 'Arial, sans-serif' }}></div>
       </div>
     );
   }
