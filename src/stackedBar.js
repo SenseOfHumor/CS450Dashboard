@@ -137,14 +137,13 @@ class StackedBarChart extends Component {
       xAxis.selectAll("text")
         .style("text-anchor", "middle")
         .style("font-size", "12px")
-        .style("font-weight", "bold");
 
       xAxis.append("text")
         .attr("x", innerWidth / 2)
         .attr("y", 40)
         .attr("fill", "black")
         .style("text-anchor", "middle")
-        .style("font-size", "14px")
+        .style("font-size", "20px")
         .style("font-weight", "bold")
         .text("Regulation Status");
 
@@ -153,7 +152,6 @@ class StackedBarChart extends Component {
 
       yAxis.selectAll("text")
         .style("font-size", "12px")
-        .style("font-weight", "bold");
 
       yAxis.append("text")
         .attr("transform", "rotate(-90)")
@@ -161,7 +159,7 @@ class StackedBarChart extends Component {
         .attr("x", -innerHeight / 2)
         .attr("fill", "black")
         .style("text-anchor", "middle")
-        .style("font-size", "14px")
+        .style("font-size", "20px")
         .style("font-weight", "bold")
         .text("Percentage (%)");
 

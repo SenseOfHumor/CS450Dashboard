@@ -93,10 +93,10 @@ class App extends Component {
         
         if (availableYears.length === 0) return;
 
-        const scale = d3.scaleLinear()
-            .domain([availableYears[0], availableYears[availableYears.length - 1]])
-            .range([0, 300])
-            .clamp(true);
+        // const scale = d3.scaleLinear()
+        //     .domain([availableYears[0], availableYears[availableYears.length - 1]])
+        //     .range([0, 300])
+        //     .clamp(true);
 
         const slider = sliderBottom()
             .min(availableYears[0])
