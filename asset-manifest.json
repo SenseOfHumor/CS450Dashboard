@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/CS450Dashboard/static/css/main.6de797c7.css",
+    "main.js": "/CS450Dashboard/static/js/main.9adfb0cc.js",
+    "static/media/Global_AI_Content_Impact_Dataset.csv": "/CS450Dashboard/static/media/Global_AI_Content_Impact_Dataset.953f6ddc10ce8f892f0c.csv",
+    "index.html": "/CS450Dashboard/index.html",
+    "main.6de797c7.css.map": "/CS450Dashboard/static/css/main.6de797c7.css.map",
+    "main.9adfb0cc.js.map": "/CS450Dashboard/static/js/main.9adfb0cc.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6de797c7.css",
+    "static/js/main.9adfb0cc.js"
+  ]
+}
