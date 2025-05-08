@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import * as d3 from "d3";
 import { sliderBottom } from 'd3-simple-slider';
 import csv from "./Global_AI_Content_Impact_Dataset.csv";
+import Heatmap from "./heatmap";
+import StackedBarChart from "./stackedBar.js";
+import LineChart from "./linechart.js";
+import WorldMap from "./worldmap.js";
 
 class App extends Component {
     constructor(props) {
@@ -81,9 +85,7 @@ class App extends Component {
             return yearMatch && countryMatch && industryMatch && toolMatch;
         });
 
-        this.setState({ selectedData: filteredData }, () => {
-            console.log("Filtered Data:", this.state.selectedData);
-        });
+        this.setState({ selectedData: filteredData });
     }
 
     createYearSlider() {
@@ -170,29 +172,83 @@ class App extends Component {
 
     render() {
         return (
+
+          <>
+
             <div className="header">
                 <div className="fc">
                     <div className="title">Global Impact of AI Content</div>
                     <div className="time-slider">
-                        <span>Year Range</span>
+                        <span className="special-span">Year Range</span>
                         <svg ref={this.sliderRef} width={360} height={50}></svg>
                     </div>
                 </div>
                 <div className="fr">
                     <div className="fc ng">
-                        <span>Country</span>
+                        <span className="special-span">Country</span>
                         <div ref={this.dropdown1Ref} className="d3-dropdown"></div>
                     </div>
                     <div className="fc ng">
-                        <span>Industry</span>
+                        <span className="special-span">Industry</span>
                         <div ref={this.dropdown2Ref} className="d3-dropdown"></div>
                     </div>
                     <div className="fc ng">
-                        <span>Top AI Tools Used</span>
+                        <span className="special-span">Top AI Tools Used</span>
                         <div ref={this.dropdown3Ref} className="d3-dropdown"></div>
                     </div>
                 </div>
             </div>
+
+            <div className="content">
+
+              <div className="grid">
+
+                <div className="cell-title">
+                  <div className="title">AI-Generated Content Volume (TBs)</div>
+                  <span className="special-span">Top AI Tools Used, Industry, and Content Volume</span>
+                </div>
+
+                <Heatmap data={this.state.selectedData}/>
+
+              </div>
+
+              <div className="grid">
+
+                <div className="cell-title">
+                  <div className="title">AI Impact by Regulation</div>
+                  <span className="special-span">Job Loss, Revenue Increase, Market Share and Regulation</span>
+                </div>
+
+                <StackedBarChart data={this.state.selectedData}/>
+
+              </div>
+
+              <div className="grid">
+
+                <div className="cell-title">
+                  <div className="title">AI Collaboration & Consumer Trust</div>
+                  <span className="special-span">Human-AI Collaboration Rate, Consumer Trust in AI, and Year</span>
+                </div>
+
+                <LineChart data={this.state.selectedData}/>
+
+              </div>
+
+              <div className="grid">
+
+                <div className="cell-title">
+                  <div className="title">Adoption Rate by Country</div>
+                  <span className="special-span">Job Loss, Revenue Increase, and Market Share(s)</span>
+                </div>
+
+                <WorldMap data={this.state.selectedData}/>
+
+              </div>
+
+            </div>
+
+          </>
+
         );
     }
 }
