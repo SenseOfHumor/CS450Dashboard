@@ -245,7 +245,7 @@ class App extends Component {
 
                 <div className="cell-title">
                   <div className="title">Adoption Rate by Country</div>
-                  <span className="special-span">Job Loss, Revenue Increase, and Market Share(s)</span>
+                  <span className="special-span">Country and AI Adoption Rate</span>
                 </div>
 
                 <WorldMap data={this.state.selectedData}/>
