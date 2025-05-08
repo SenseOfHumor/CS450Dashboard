@@ -93,10 +93,17 @@ class App extends Component {
         
         if (availableYears.length === 0) return;
 
+<<<<<<< HEAD
         const scale = d3.scaleLinear()
             .domain([availableYears[0], availableYears[availableYears.length - 1]])
             .range([0, 300])
             .clamp(true);
+=======
+        // const scale = d3.scaleLinear()
+        //     .domain([availableYears[0], availableYears[availableYears.length - 1]])
+        //     .range([0, 300])
+        //     .clamp(true);
+>>>>>>> 1b7e9d79c8145874bfac1524a367bf5eca15999a
 
         const slider = sliderBottom()
             .min(availableYears[0])
@@ -238,7 +245,7 @@ class App extends Component {
 
                 <div className="cell-title">
                   <div className="title">Adoption Rate by Country</div>
-                  <span className="special-span">Country and Adoption Rate</span>
+                  <span className="special-span">Job Loss, Revenue Increase, and Market Share(s)</span>
                 </div>
 
                 <WorldMap data={this.state.selectedData}/>

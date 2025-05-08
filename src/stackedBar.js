@@ -73,12 +73,29 @@ class StackedBarChart extends Component {
         .domain(["jobLoss", "revenueIncrease", "marketShare"])
         .range(["#e41a1c", "#377eb8", "#4daf4a"]);
 
+<<<<<<< HEAD
+=======
+      const tooltip = d3.select(this.container.parentNode)  // <-- key: use parent div of <svg>
+        .append("div")
+        .attr("class", "tooltip")
+        .style("position", "absolute")
+        .style("background", "rgb(50, 50, 50)")
+        .style("color", "white")
+        .style("padding", "8px")
+        .style("border", "1px solid black")
+        .style("border-radius", "5px")
+        .style("pointer-events", "none")
+        .style("opacity", 0);
+>>>>>>> 1b7e9d79c8145874bfac1524a367bf5eca15999a
       const legendItems = [
         { label: "Job Loss (%)", color: "#e41a1c" },
         { label: "Revenue Increase (%)", color: "#377eb8" },
         { label: "Market Share of AI Companies", color: "#4daf4a" }
       ];
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1b7e9d79c8145874bfac1524a367bf5eca15999a
       const legend = svg.append("g")
         .attr("class", "legend")
         .attr("transform", `translate(${width/2 - 250}, 30)`);
@@ -118,6 +135,7 @@ class StackedBarChart extends Component {
             .attr("width", x.bandwidth())
             .attr("stroke", "white")
             .attr("stroke-width", 1)
+<<<<<<< HEAD
             .append("title")
               .text(d => {
                 const metricMap = {
@@ -129,6 +147,48 @@ class StackedBarChart extends Component {
                 const value = d.data[d.key] || 0;
                 return `${d.data.regulation}: ${metric} = ${value.toFixed(1)}%`;
               });
+=======
+            .on("mouseover", function (event, d) {
+              const metricMap = {
+                jobLoss: "Job Loss",
+                revenueIncrease: "Revenue Increase",
+                marketShare: "Market Share"
+              };
+              const metricKey = d3.select(this.parentNode).datum().key;
+              const metricLabel = metricMap[metricKey] || metricKey;
+              const value = d.data[metricKey] || 0;
+            
+              d3.select(this).attr("stroke-width", 2);
+            
+              tooltip.transition().duration(200).style("opacity", 0.9);
+              tooltip.html(`
+                <strong>${d.data.regulation}</strong><br/>
+                ${metricLabel}: ${value.toFixed(1)}%
+              `)
+              .style("left", `${event.pageX + 10}px`)
+              .style("top", `${event.pageY - 28}px`);
+            })
+            .on("mousemove", function (event) {
+              tooltip
+                .style("left", `${event.pageX + 10}px`)
+                .style("top", `${event.pageY - 28}px`);
+            })
+            .on("mouseout", function () {
+              d3.select(this).attr("stroke-width", 1);
+              tooltip.transition().duration(200).style("opacity", 0);
+            });
+            // .append("title")
+            //   .text(d => {
+            //     const metricMap = {
+            //       jobLoss: "Job Loss",
+            //       revenueIncrease: "Revenue Increase",
+            //       marketShare: "Market Share"
+            //     };
+            //     const metric = metricMap[d.key] || d.key;
+            //     const value = d.data[d.key] || 0;
+            //     return `${d.data.regulation}: ${metric} = ${value.toFixed(1)}%`;
+            //   });
+>>>>>>> 1b7e9d79c8145874bfac1524a367bf5eca15999a
 
       const xAxis = innerChart.append("g")
         .attr("transform", `translate(0, ${innerHeight})`)
@@ -137,14 +197,21 @@ class StackedBarChart extends Component {
       xAxis.selectAll("text")
         .style("text-anchor", "middle")
         .style("font-size", "12px")
+<<<<<<< HEAD
         .style("font-weight", "bold");
+=======
+>>>>>>> 1b7e9d79c8145874bfac1524a367bf5eca15999a
 
       xAxis.append("text")
         .attr("x", innerWidth / 2)
         .attr("y", 40)
         .attr("fill", "black")
         .style("text-anchor", "middle")
+<<<<<<< HEAD
         .style("font-size", "14px")
+=======
+        .style("font-size", "20px")
+>>>>>>> 1b7e9d79c8145874bfac1524a367bf5eca15999a
         .style("font-weight", "bold")
         .text("Regulation Status");
 
@@ -153,7 +220,10 @@ class StackedBarChart extends Component {
 
       yAxis.selectAll("text")
         .style("font-size", "12px")
+<<<<<<< HEAD
         .style("font-weight", "bold");
+=======
+>>>>>>> 1b7e9d79c8145874bfac1524a367bf5eca15999a
 
       yAxis.append("text")
         .attr("transform", "rotate(-90)")
@@ -161,7 +231,11 @@ class StackedBarChart extends Component {
         .attr("x", -innerHeight / 2)
         .attr("fill", "black")
         .style("text-anchor", "middle")
+<<<<<<< HEAD
         .style("font-size", "14px")
+=======
+        .style("font-size", "20px")
+>>>>>>> 1b7e9d79c8145874bfac1524a367bf5eca15999a
         .style("font-weight", "bold")
         .text("Percentage (%)");
 
@@ -176,6 +250,10 @@ class StackedBarChart extends Component {
         .style("font-size", "16px")
         .text("Error creating chart. Check console for details.");
     }
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 1b7e9d79c8145874bfac1524a367bf5eca15999a
   };
 
   render() {

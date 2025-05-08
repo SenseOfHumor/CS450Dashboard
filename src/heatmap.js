@@ -95,7 +95,10 @@ class Heatmap extends Component {
 
     const uniqueCells = Array.from(cellMap.values());
 
+<<<<<<< HEAD
     // Draw heatmap squares
+=======
+>>>>>>> 1b7e9d79c8145874bfac1524a367bf5eca15999a
     svg.selectAll("rect")
       .data(uniqueCells)
       .join("rect")
@@ -105,7 +108,10 @@ class Heatmap extends Component {
       .attr("height", cellSize)
       .attr("fill", d => colorScale(d.value));
 
+<<<<<<< HEAD
     // Add text to cells
+=======
+>>>>>>> 1b7e9d79c8145874bfac1524a367bf5eca15999a
     svg.selectAll(".cell-label")
       .data(uniqueCells)
       .join("text")
@@ -122,7 +128,12 @@ class Heatmap extends Component {
       })
       .text(d => d.value.toFixed(1));
       
+<<<<<<< HEAD
     // X-axis (Industries)
+=======
+    // X-axis 
+    
+>>>>>>> 1b7e9d79c8145874bfac1524a367bf5eca15999a
     svg.append("g")
       .attr("transform", `translate(0, ${adjustedHeight})`)
       .call(d3.axisBottom(xScale).tickSize(6))
@@ -132,7 +143,10 @@ class Heatmap extends Component {
       .style("font-family", "Arial")
       .style("font-size", "11px");
 
+<<<<<<< HEAD
     // X-Axis Title
+=======
+>>>>>>> 1b7e9d79c8145874bfac1524a367bf5eca15999a
     svg.append("text")
       .attr("x", adjustedWidth / 2)
       .attr("y", adjustedHeight + 80) 
@@ -142,7 +156,11 @@ class Heatmap extends Component {
       .style("font-family", "Arial")
       .text("Industries");
   
+<<<<<<< HEAD
     // Y-axis (Tools)
+=======
+    // Y-axis
+>>>>>>> 1b7e9d79c8145874bfac1524a367bf5eca15999a
     svg.append("g")
       .call(d3.axisLeft(yScale).tickSize(6))
       .selectAll("text")
@@ -150,7 +168,10 @@ class Heatmap extends Component {
       .style("font-family", "Arial")
       .style("font-size", "11px");
 
+<<<<<<< HEAD
     // Y-Axis Title
+=======
+>>>>>>> 1b7e9d79c8145874bfac1524a367bf5eca15999a
     svg.append("text")
       .attr("x", -adjustedHeight/2)
       .attr("y", -margin.left+20) 

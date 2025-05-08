@@ -15,7 +15,11 @@ function WorldMap({ data }) {
         const filtered_data = d3.rollup(
             data,
             v => d3.mean(v, d => +d['AI Adoption Rate (%)']),
+<<<<<<< HEAD
             d => d.Country == "UK" ? "England" : d.Country // FIXS THE ERROR FOR NOT HAVING "UK" ON THE MAP!!!!!!
+=======
+            d => d.Country === "UK" ? "England" : d.Country // FIXS THE ERROR FOR NOT HAVING "UK" ON THE MAP!!!!!!
+>>>>>>> 1b7e9d79c8145874bfac1524a367bf5eca15999a
         );
     
         return Array.from(filtered_data, ([country, avg]) => ({ country, averageAIAodoptionRate: avg }));
