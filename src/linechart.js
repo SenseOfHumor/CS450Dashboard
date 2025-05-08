@@ -109,10 +109,7 @@ class LineChart extends Component {
       .attr("x", innerWidth / 2)
       .attr("y", innerHeight + 40)
       .attr("text-anchor", "middle")
-<<<<<<< HEAD
-=======
       .style("font-size", "20px")
->>>>>>> 1b7e9d79c8145874bfac1524a367bf5eca15999a
       .style("font-weight", "bold")
       .text("Year");
 
@@ -121,10 +118,7 @@ class LineChart extends Component {
       .attr("x", -innerHeight / 2)
       .attr("y", -40)
       .attr("text-anchor", "middle")
-<<<<<<< HEAD
-=======
       .style("font-size", "20px")
->>>>>>> 1b7e9d79c8145874bfac1524a367bf5eca15999a
       .style("font-weight", "bold")
       .text("Consumer Trust in AI (%)");
 
@@ -133,10 +127,7 @@ class LineChart extends Component {
       .attr("x", innerHeight / 2)
       .attr("y", -innerWidth - 40)
       .attr("text-anchor", "middle")
-<<<<<<< HEAD
-=======
       .style("font-size", "20px")
->>>>>>> 1b7e9d79c8145874bfac1524a367bf5eca15999a
       .style("font-weight", "bold")
       .text("Human-AI Collaboration Rate (%)");
   }
