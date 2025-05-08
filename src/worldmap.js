@@ -99,7 +99,8 @@ function WorldMap({ data }) {
           tooltip.transition().duration(200).style("opacity", 0);
         });
   
-      // Color legend
+        // ---------------------- LEGEND ----------------------
+        
       const legendWidth = 300;
       const legendHeight = 10;
   

@@ -4,9 +4,7 @@ import React, { Component } from "react";
 class Heatmap extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      data: props.data || null,
-    };
+    this.state = { data: props.data };
     this.chartRef = React.createRef();
   }
 
