@@ -37,7 +37,7 @@ class LineChart extends Component {
       Math.min(100, valueExtent[1] + rangePadding)
     ];
 
-    const margin = { top: 40, right: 20, bottom: 50, left: 80 };
+    const margin = { top: 60, right: 20, bottom: 50, left: 80 };
     const width = 800;
     const height = 500;
     const innerWidth = width - margin.left - margin.right - 50;
@@ -50,14 +50,8 @@ class LineChart extends Component {
       .append("g")
       .attr("transform", `translate(${margin.left},${margin.top})`);
 
-    // This part was added cause we kept getting an issue of there being no data to display whenever we had a year range of a singular number
-    // Like for example, if our date ranges were [2020 - 2020] -> we would not get any data so we resorted to making fake ticks to append
-    // the same data to and make a straight line.
-
     const singlePoint = data.length === 1;
     const displayData = singlePoint ? [data[0], {...data[0], Year: new Date(data[0].Year.getFullYear(), 1, 1)}] : data;
-
-    // ------------------------
 
     const xScale = d3.scaleTime()
       .domain(d3.extent(displayData, d => d.Year))
@@ -107,7 +101,7 @@ class LineChart extends Component {
 
     svg.append("text")
       .attr("x", innerWidth / 2)
-      .attr("y", innerHeight + 40)
+      .attr("y", innerHeight + 50)
       .attr("text-anchor", "middle")
       .style("font-size", "20px")
       .style("font-weight", "bold")
@@ -130,6 +124,39 @@ class LineChart extends Component {
       .style("font-size", "20px")
       .style("font-weight", "bold")
       .text("Human-AI Collaboration Rate (%)");
+
+    const legend = svg.append("g")
+      .attr("transform", `translate(${innerWidth/2 - 200}, -30)`);
+
+    legend.append("rect")
+      .attr("x", 0)
+      .attr("width", 15)
+      .attr("height", 15)
+      .attr("fill", "steelblue")
+      .attr("opacity", 0.75);
+
+    legend.append("text")
+      .attr("x", 25)
+      .attr("y", 7)
+      .attr("dy", "0.35em")
+      .text("Consumer Trust in AI")
+      .style("font-size", "12px")
+      .style("font-weight", "bold");
+
+    legend.append("rect")
+      .attr("x", 200)
+      .attr("width", 15)
+      .attr("height", 15)
+      .attr("fill", "red")
+      .attr("opacity", 0.75);
+
+    legend.append("text")
+      .attr("x", 225)
+      .attr("y", 8)
+      .attr("dy", "0.35em")
+      .text("Human-AI Collaboration Rate")
+      .style("font-size", "12px")
+      .style("font-weight", "bold");
   }
 
   render() {
